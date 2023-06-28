@@ -10,10 +10,10 @@
 void fill(char** ptr);                                                                          // to fill an array with some data
 void output_all();                                                                              // output all of 100 "accounts"
 void search();                                                                                  // switch to search menu
-void search_by_name(int struct_length);                                                         // searching by name
-void search_by_surname(int struct_length);                                                      // searching by surname
-void search_by_phone(int struct_length);                                                        // searching by number
-void search_by_address(int struct_length);                                                      // searching by address
+void search_by_name(void);                                                                      // searching by name
+void search_by_surname(void);                                                                   // searching by surname
+void search_by_phone(void);                                                                     // searching by number
+void search_by_address(void);                                                                   // searching by address
 void add();
 void delete();
 
@@ -214,16 +214,16 @@ void search(int struct_length) {                                                
         switch (choose)
         {
         case 1:
-            search_by_name(struct_length);                                                  // 4 funcs for each paramert of searching
+            search_by_name();                                                               // 4 funcs for each paramert of searching
             break;
         case 2:
-            search_by_surname(struct_length);
+            search_by_surname();
             break;
         case 3:
-            search_by_phone(struct_length);
+            search_by_phone();
             break;
         case 4:
-            search_by_address(struct_length);
+            search_by_address();
             break;
         case 0:
             break;
@@ -233,12 +233,12 @@ void search(int struct_length) {                                                
     }
 }
 
-void search_by_name(int struct_length) {
+void search_by_name(void) {
     char search[20] = {NULL};
     printf("Enter the name you are looking for: ");
     scanf("%s", search);
     printf("Results:\n");
-    for(int i = 0; i < struct_length; i++) {
+    for(int i = 0; i < sizeof(directory) / 84; i++) {
         if(strcmp(search, directory[i].name)) {
             continue;
         } else {
@@ -255,12 +255,12 @@ void search_by_name(int struct_length) {
     printf("0. Back\n");
 }
 
-void search_by_surname(int struct_length) {
+void search_by_surname(void) {
     char search[20] = {NULL};
     printf("Enter the surname you are looking for: ");
     scanf("%s", search);
     printf("Results:\n");
-    for(int i = 0; i < struct_length; i++) {
+    for(int i = 0; i < sizeof(directory) / 84; i++) {
         if(strcmp(search, directory[i].surname)) {
             continue;
         } else {
@@ -277,12 +277,12 @@ void search_by_surname(int struct_length) {
     printf("0. Back\n");
 }
 
-void search_by_phone(int struct_length) {
+void search_by_phone(void) {
     char search[20] = {NULL};
     printf("Enter phone number you are looking for: ");
     scanf("%s", search);
     printf("Results:\n");
-    for(int i = 0; i < struct_length; i++) {
+    for(int i = 0; i < sizeof(directory) / 84; i++) {
         if(strcmp(search, directory[i].number)) {
             continue;
         } else {
@@ -299,12 +299,12 @@ void search_by_phone(int struct_length) {
     printf("0. Back\n");
 }
 
-void search_by_address(int struct_length) {
+void search_by_address(void) {
     char search[20] = {NULL};
     printf("Enter address you are looking for: ");
     scanf("%s", search);
     printf("Results:\n");
-    for(int i = 0; i < struct_length; i++) {
+    for(int i = 0; i < sizeof(directory) / 84; i++) {
         if(strcmp(search, directory[i].address)) {
             continue;
         } else {
@@ -373,6 +373,7 @@ void add() {
     printf("SURNAME: %s\n", directory[identificator-1].surname);
     printf("NUMBER: %s\n", directory[identificator-1].number);
     printf("ADDRESS: %s\n", directory[identificator-1].address);
+    printf("Array length is %ld now\n", sizeof(directory) / 84);
     identificator++;
 }
 
@@ -423,4 +424,5 @@ void delete() {
         }
     }
     identificator++;
+    printf("Array length is %ld now\n", sizeof(directory) / 84);
 }
